@@ -9,8 +9,9 @@ import path from 'path';
 import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Html from './components/Html';
-import App from './components/App';
+import Html from './components/Html/Html';
+import Router from './core/Router';
+// import App from './components/App';
 
 const server = express();
 const port = process.env.PORT || 3000;
@@ -18,7 +19,8 @@ const port = process.env.PORT || 3000;
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.get('*', (req, res) => {
-  const body = ReactDOM.renderToString(<App />);
+  const component = Router.match(req);
+  const body = ReactDOM.renderToString(component);
   const html = ReactDOM.renderToStaticMarkup(<Html
     title="My App"
     description="Isomorphic web application sample"
