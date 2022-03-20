@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 function Header({ children }) {
   return(
@@ -20,8 +20,8 @@ function Header({ children }) {
   );
 }
 
-Header.PropTypes = {
-  children: PropTypes.element
+Header.propTypes = {
+  children: propTypes.element
 };
 
 export default Header;

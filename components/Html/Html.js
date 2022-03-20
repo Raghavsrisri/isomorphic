@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 function Html({ title, description, body }) {
   return (
@@ -26,9 +26,9 @@ function Html({ title, description, body }) {
 }
 
 Html.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired
+  title: propTypes.string.isRequired,
+  description: propTypes.string.isRequired,
+  body: propTypes.string.isRequired
 };
 
 export default Html;

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import Header from '../Header/Header'
 function Layout({ hero, children }) {
   return (
@@ -16,8 +16,8 @@ function Layout({ hero, children }) {
 }
 
 Layout.propTypes = {
-  hero: PropTypes.element,
-  children: PropTypes.element.isRequired
+  hero: propTypes.element,
+  children: propTypes.element.isRequired
 };
 
 export default Layout;
