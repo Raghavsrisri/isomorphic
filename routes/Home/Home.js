@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 import Hero from "./Hero";
 
 const path = '/';
-const action = () => <Layout hero={<Hero />}><Home /></Layout>
+const action = () => <Layout><Home /></Layout>
 
 class Home extends Component {
   handleClick(event) {
@@ -13,6 +13,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Hero />
         <h2>Popular thing to rent</h2>
         <div>
           <a href="/s/Tools" onClick={this.handleClick}>

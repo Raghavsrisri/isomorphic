@@ -11,6 +11,7 @@ import webpackConfig from './webpack.config';
 const RUNNING_REGEXP = /Node\.js server is listening at http:\/\/(.*?)\//;
 
 let server;
+
 const { output } = webpackConfig.find(x => x.target === 'node');
 const serverPath = path.join(output.path, output.filename);
 

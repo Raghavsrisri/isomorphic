@@ -19,6 +19,7 @@
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.5.0",
     "babel-preset-stage-0": "6.5.0",
+    "browser-sync": "^2.27.9",
     "css-loader": "0.28.5",
     "del": "3.0.0",
     "eslint": "4.6.1",
@@ -57,6 +58,7 @@
   "scripts": {
     "lint": "eslint components core data routes test tools",
     "build": "babel-node tools/run build",
-    "serve": "node build/server.js"
+    "serve": "node build/server.js",
+    "start": "babel-node tools/run start"
   }
 }
