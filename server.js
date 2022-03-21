@@ -1,9 +1,3 @@
-/*
- * Learning Isomorphic Web Application Development
- * Copyright © 2015 Konstantin Tarkus, Packt Publishing
- * All rights reserved.
- */
-
 import 'babel-core/register';
 import path from 'path';
 import express from 'express';
@@ -11,13 +5,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import Html from './components/Html/Html';
 import Router from './core/Router';
+
 // import App from './components/App';
 
 const server = express();
 const port = process.env.PORT || 3000;
 
-const bs = require('browser-sync').create();
-bs.init({ proxy: 'localhost:3000 '});
+// const bs = require('browser-sync').create();
+//  bs.init({ proxy: 'localhost:3000'});
 
 server.use(express.static(path.join(__dirname, 'public')));
 

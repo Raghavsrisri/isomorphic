@@ -5,6 +5,7 @@
 
 import path from 'path';
 import extend from 'extend';
+import { webpack } from 'webpack';
 
 const common = {
 
@@ -12,6 +13,8 @@ const common = {
     colors: true,
     chunks: false
   },
+
+
 
   module: {
     rules: [

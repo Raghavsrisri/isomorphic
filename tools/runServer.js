@@ -7,11 +7,13 @@ import path from 'path';
 import cp from 'child_process';
 import webpackConfig from './webpack.config';
 
+
+
 // Should match the text string used in `server.js/server.listen(...)`
 const RUNNING_REGEXP = /Node\.js server is listening at http:\/\/(.*?)\//;
 
 let server;
-
+// const webpackConfig = require('./webpack.config');
 const { output } = webpackConfig.find(x => x.target === 'node');
 const serverPath = path.join(output.path, output.filename);
 
