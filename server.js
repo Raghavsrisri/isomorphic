@@ -1,20 +1,23 @@
-
 import 'babel-core/register';
 import path from 'path';
 import express from 'express';
-import graphql, { graphqlHTTP } from 'express-graphql';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import schema from './data/schema';
-import Router from './core/Router';
 import Html from './components/Html/Html';
+import Router from './core/Router';
+import { graphqlHTTP } from 'express-graphql';
+import schema from './data/schema';
 
-const app = express();
+// import App from './components/App';
+
+const server = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'public')));
+// const bs = require('browser-sync').create();
+//  bs.init({ proxy: 'localhost:3000'});
 
-app.use((req, res, next) => {
+server.use(express.static(path.join(__dirname, 'public')));
+server.use((req, res, next) => {
   if (typeof req.query.admin !== 'undefined') {
     req.user = { id: 1 }; // eslint-disable-line no-param-reassign
   } else {
@@ -22,15 +25,13 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-app.use('/graphql', graphqlHTTP({
+server.use('/graphql', graphqlHTTP({
   schema,
   rootValue: { user: { id: 1 } },
   pretty: process.env.NODE_ENV !== 'production',
   graphiql: true
 }));
-
-app.get('*', (req, res) => {
+server.get('*', (req, res) => {
   const state = { user: req.user };
   const [component, page] = Router.match(req, state);
   const body = ReactDOM.renderToString(component);
@@ -44,13 +45,6 @@ app.get('*', (req, res) => {
   );
   res.status(page.status).send(`<!doctype html>\n${html}`);
 });
-
-// /* eslint-disable no-console */
-// models.sync({ force: process.env.NODE_ENV !== 'production' })
-//   .catch(err => console.error(err.stack))
-//   .then(() => {
-//     app.listen(port, () => console.log(
-//       `Node.js server is listening at http://localhost:${port}/`
-//     ));
-//   });
-// /* eslint-enable no-console */
+server.listen(port, () => console.log(
+  `Node.js server is listening at http://localhost:${port}/`
+));
