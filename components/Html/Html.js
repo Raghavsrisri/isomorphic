@@ -1,13 +1,6 @@
-/*
- * Learning Isomorphic Web Application Development
- * Copyright © 2015 Konstantin Tarkus, Packt Publishing
- * All rights reserved.
- */
-
-import React from 'react';
-import propTypes from 'prop-types';
-
-function Html({ title, description, body }) {
+import React from "react";
+import PropTypes from "prop-types";
+function Html({ title, description, body, state }) {
   return (
     <html>
       <head>
@@ -16,19 +9,23 @@ function Html({ title, description, body }) {
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script src="client.js" async />
+        <script asyncsrc="client.js" />
       </head>
       <body>
-        <div id="app" dangerouslySetInnerHTML={{__html: body}} />
+        <div id="app" dangerouslySetInnerHTML={{ __html: body }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "window.AppState=" + JSON.stringify(state),
+          }}
+        ></script>
       </body>
     </html>
   );
 }
-
 Html.propTypes = {
-  title: propTypes.string.isRequired,
-  description: propTypes.string.isRequired,
-  body: propTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  state: PropTypes.object.isRequired,
 };
-
 export default Html;
