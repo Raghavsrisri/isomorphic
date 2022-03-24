@@ -27,7 +27,7 @@ function Layout({ hero, children }) {
   return (
     <div>
       <Header></Header>
-      <Context user={{ name: 'Tarkus' }} page={page}>  <Captain />  </Context>
+
       <main>{children}</main>
       <footer>
         <span>© Company Name</span>
