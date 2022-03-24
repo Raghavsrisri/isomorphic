@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Context extends React.Component {
-  staticchildContextTypes = {
+  static childContextTypes = {
     page: PropTypes.shape({
       title: PropTypes.string,
       description: PropTypes.string,
@@ -19,7 +19,7 @@ class Context extends React.Component {
     };
   }
   render() {
-    returnReact.Children.only(this.props.children);
+    return React.Children.only(this.props.children);
   }
 }
 

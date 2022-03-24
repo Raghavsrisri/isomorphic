@@ -44,6 +44,7 @@ class Test extends Component {
   render() {
     const { page, user } = this.context;
     page.title = 'Test Page';
+    page.user={name: 'Tarkus'}
 
     return (
       <div>

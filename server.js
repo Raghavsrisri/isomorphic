@@ -1,33 +1,36 @@
-import "babel-core/register";
-import path from "path";
-import express from "express";
-import React from "react";
-import ReactDOM from "react-dom/server";
-import Router from "./core/Router";
-import Html from "./components/Html/Html";
 
-const server = express();
+import 'babel-core/register';
+import path from 'path';
+import express from 'express';
+import graphql, { graphqlHTTP } from 'express-graphql';
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import schema from './data/schema';
+import Router from './core/Router';
+import Html from './components/Html/Html';
+
+const app = express();
 const port = process.env.PORT || 3000;
 
-server.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
-server.use((req, res, next) => {
-  if (typeof req.query.admin !== "undefined") {
-    req.user = { name: "Tarkus " };
+app.use((req, res, next) => {
+  if (typeof req.query.admin !== 'undefined') {
+    req.user = { id: 1 }; // eslint-disable-line no-param-reassign
   } else {
-    req.user = null;
+    req.user = null; // eslint-disable-line no-param-reassign
   }
   next();
 });
 
-// server.use('/api', require('./api/test').default);
-function run() {
-  constlocation = { path: window.location.pathname };
-  const component = Router.match(location, window.AppState);
-  ReactDOM.render(component, document.getElementById("app"));
-}
+app.use('/graphql', graphqlHTTP({
+  schema,
+  rootValue: { user: { id: 1 } },
+  pretty: process.env.NODE_ENV !== 'production',
+  graphiql: true
+}));
 
-server.get("*", (req, res) => {
+app.get('*', (req, res) => {
   const state = { user: req.user };
   const [component, page] = Router.match(req, state);
   const body = ReactDOM.renderToString(component);
@@ -39,10 +42,15 @@ server.get("*", (req, res) => {
       state={state}
     />
   );
-  res.status(page.status).send("<!doctype html>\n" + html);
+  res.status(page.status).send(`<!doctype html>\n${html}`);
 });
-server.use('/api', require('./api/test.js'));
 
-server.listen(port, () =>
-  console.log(`Node.js server is listening at http://localhost:${port}/`)
-);
+// /* eslint-disable no-console */
+// models.sync({ force: process.env.NODE_ENV !== 'production' })
+//   .catch(err => console.error(err.stack))
+//   .then(() => {
+//     app.listen(port, () => console.log(
+//       `Node.js server is listening at http://localhost:${port}/`
+//     ));
+//   });
+// /* eslint-enable no-console */
