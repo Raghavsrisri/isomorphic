@@ -3,9 +3,15 @@
   "name": "header",
   "main": "./Header.js",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@faker-js/faker": "^6.0.0",
+    "@types/sequelize": "^4.28.11",
     "bluebird": "3.5.0",
+    "dotenv": "^16.0.0",
     "express": "4.15.4",
+    "i": "^0.3.7",
     "moment": "2.18.1",
+    "npm": "^8.5.5",
     "react": "16.0.0",
     "react-dom": "16.0.0"
   },
@@ -27,6 +33,7 @@
     "eslint-plugin-react": "7.3.0",
     "express-graphql": "^0.12.0",
     "extend": "3.0.0",
+    "faker": "^5.5.3",
     "file-loader": "0.11.2",
     "gaze": "1.1.2",
     "graphql": "^16.3.0",

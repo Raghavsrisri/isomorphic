@@ -1,17 +1,20 @@
+
 import {
   GraphQLSchema as Schema,
   GraphQLObjectType as ObjectType,
-} from "graphql";
-import greeting from "./queries/greeting";
+} from 'graphql';
 
-
+import viewer from './queries/viewer';
+import greeting from './queries/greeting';
 
 const schema = new Schema({
   query: new ObjectType({
-    name: "Query",
+    name: 'Query',
     fields: {
-      greeting,
-    },
-  }),
+      viewer,
+      greeting
+    }
+  })
 });
+
 export default schema;
